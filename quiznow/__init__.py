@@ -1,16 +1,16 @@
 from flask import Flask, request
 
 
- # Set project directory as static directory
- app = Flask(__name__)
+# Set project directory as static directory
+app = Flask(__name__)
 
  
- # Set app routes
+# Set app routes
 
- # Homepage
- @app.route("/")
- def root():
-	 return render_template("index.html")
+# Homepage
+@app.route("/")
+def root():
+	return render_template("index.html")
 
 
 # Redirect user as candidate or administrator
