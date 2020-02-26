@@ -16,5 +16,14 @@
 # Redirect user as candidate or administrator
 @app.route("/index.html", methods = ["POST"])
 def mode():
-	selected = request.form["mode"]
-	if selected == "test":
+	# Set default value to avoid 404
+	default_name = '0'
+
+	selected = request.form.get("mode", default_name)
+
+	# Redirect candidates to test taking page
+	if selected == "candidate":
+		return redirect(url_for("test.html"))
+	# Redirect administrators to admin page
+	elif selected == "admin":
+		return redirect(url_for("admin.html"))
