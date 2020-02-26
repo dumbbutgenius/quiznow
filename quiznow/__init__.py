@@ -1,4 +1,4 @@
- from flask import Flask, request
+from flask import Flask, request
 
 
  # Set project directory as static directory
@@ -14,8 +14,8 @@
 
 
 # Redirect user as candidate or administrator
-@app.route("/handle_mode", methods = ["POST"])
-def mode():
+@app.route("/", methods = ["POST"])
+def mode_redirect():
 	if request.method == "POST":
 		# Set default value to avoid 404
 		default_name = '0'
