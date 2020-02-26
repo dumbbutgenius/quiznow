@@ -1,0 +1,13 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+	<form action = "handle_mode" method = "POST">
+		<input type = "radio" id = "candidate" name = "mode" value = "Take the test">
+		<label for = "candidate">Take the test</label><br>
+		<input type = "radio" id = "admin" name = "mode" value = "Continue as administrator">
+		<label for = "admin">Continue as administrator</label><br>
+		<input type = "submit" id = "submit" name = "submit" value = "Submit">
+	</form>
+
+{% endblock %}
