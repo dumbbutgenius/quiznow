@@ -14,5 +14,7 @@
 
 
 # Redirect user as candidate or administrator
-@app.route("/handle_mode", methods = ["POST"])
+@app.route("/index.html", methods = ["POST"])
 def mode():
+	selected = request.form["mode"]
+	if selected == "test":
