@@ -1,8 +1,8 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 
 # Set project directory as static directory
-app = Flask(__name__)
+app = Flask(__name__, template_folder = "templates")
 
  
 # Set app routes
