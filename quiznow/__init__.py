@@ -24,20 +24,33 @@ def mode_redirect():
 
 		# Redirect candidates to test taking page
 		if selected == "candidate":
-			return redirect(url_for("test.html"))
+			return redirect(url_for("test"))
 		# Redirect administrators to admin page
 		elif selected == "admin":
-			return redirect(url_for("admin"))
+			return redirect(url_for("admin_show"))
+
 
 # Show admin login
-@app.route("/admin", methods = ["GET", "POST"])
-def admin():
+@app.route("/admin")
+def admin_show():
 	return render_template("admin.html")
 
 
+# Show page to add questions
+@app.route("/questions")
+def questions():
+	return render_template("questions.html")
+
+
+# Show invalid login attempt
+@app.route("/invalid")
+def invalid():
+	return render_template("invalid.html")
+
+
 # Handle admin login
-'''@app.route("/login", methods = ["GET", "POST"])
-def admin():
+@app.route("/admin", methods = ["GET", "POST"])
+def admin_handle():
 	if request.method == "POST":
 		# Set default name to avoid 404
 		default_name = "0"
@@ -51,4 +64,6 @@ def admin():
 		password_real = creds["password"]
 
 		if username == username_real and password == password_real:
-			return redirect(url_for("questions.html"))'''
+			return redirect(url_for("questions"))
+		else:
+			return redirect(url_for("invalid"))
