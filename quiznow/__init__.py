@@ -18,7 +18,7 @@ def root():
 def mode_redirect():
 	if request.method == "POST":
 		# Set default value to avoid 404
-		default_name = '0'
+		default_name = "0"
 
 		selected = request.form.get("mode", default_name)
 
@@ -28,3 +28,14 @@ def mode_redirect():
 		# Redirect administrators to admin page
 		elif selected == "admin":
 			return redirect(url_for("admin.html"))
+
+
+# Handle admin login
+@app.route("/admin", methods = ["GET", "POST"])
+def admin():
+	if request.method == "POST":
+		# Set default name to avoid 404
+		default_name = "0"
+
+		username = request.form.get("username", default_name)
+		password = request.form.get("password", default_name)
