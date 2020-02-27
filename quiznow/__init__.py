@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for
+import json
 
 
 # Set project directory as static directory
@@ -49,6 +50,7 @@ def invalid():
 
 
 # Handle admin login
+# TODO: add real authentication
 @app.route("/admin", methods = ["GET", "POST"])
 def admin_handle():
 	if request.method == "POST":
@@ -58,10 +60,10 @@ def admin_handle():
 		username = request.form.get("username", default_name)
 		password = request.form.get("password", default_name)
 
-		with open("creds.json", "r") as w:
-			creds = json.load()
-		username_real = creds["username"]
-		password_real = creds["password"]
+		with open("creds.json", "r") as f:
+			creds = json.load(f)
+		username_real = creds["admin"][0]
+		password_real = creds["admin"][1]
 
 		if username == username_real and password == password_real:
 			return redirect(url_for("questions"))
