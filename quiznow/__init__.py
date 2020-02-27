@@ -14,7 +14,7 @@ def root():
 
 
 # Redirect user as candidate or administrator
-@app.route("/", methods = ["POST"])
+@app.route("/", methods = ["GET", "POST"])
 def mode_redirect():
 	if request.method == "POST":
 		# Set default value to avoid 404
