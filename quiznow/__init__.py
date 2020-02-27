@@ -27,11 +27,16 @@ def mode_redirect():
 			return redirect(url_for("test.html"))
 		# Redirect administrators to admin page
 		elif selected == "admin":
-			return redirect(url_for("admin.html"))
+			return redirect(url_for("admin"))
+
+# Show admin login
+@app.route("/admin", methods = ["GET", "POST"])
+def admin():
+	return render_template("admin.html")
 
 
 # Handle admin login
-@app.route("/admin", methods = ["GET", "POST"])
+'''@app.route("/login", methods = ["GET", "POST"])
 def admin():
 	if request.method == "POST":
 		# Set default name to avoid 404
@@ -39,3 +44,11 @@ def admin():
 
 		username = request.form.get("username", default_name)
 		password = request.form.get("password", default_name)
+
+		with open("creds.json", "r") as w:
+			creds = json.load()
+		username_real = creds["username"]
+		password_real = creds["password"]
+
+		if username == username_real and password == password_real:
+			return redirect(url_for("questions.html"))'''
