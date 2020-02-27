@@ -70,3 +70,32 @@ def admin_handle():
 			return redirect(url_for("questions"))
 		else:
 			return redirect(url_for("invalid"))
+
+
+# Add new questions
+@app.route("/questions", method = ["GET", "POST"])
+def add_questions():
+	if request.method == "POST":
+		# Set default name to avoid 404
+		default_name = "0"
+
+		# Get question details
+		question = request.form.get("new_question", default_name)
+		count = 1
+		a, b, c, d = request.form.get(x for x in ['a', 'b', 'c', 'd'])
+		answer = request.form.get("answer")
+
+		# Construct dictionary for new question
+		new_question = {
+			count {
+				'a' : a,
+				'b' : b,
+				'c' : c,
+				'd' : d
+				"answer" : answer
+			}
+		}
+
+		# Dump the constructed dictionary to JSON database
+		with open("questions.json", "a") as f:
+			json.dump(new_question, w)
