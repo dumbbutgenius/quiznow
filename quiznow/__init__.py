@@ -57,6 +57,7 @@ def admin_handle():
 		# Set default name to avoid 404
 		default_name = "0"
 
+		# Get credentials given by user
 		username = request.form.get("username", default_name)
 		password = request.form.get("password", default_name)
 

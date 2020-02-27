@@ -1,0 +1,20 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+	<h3>Hi, administrator</h3>
+	<form action = "" method = "POST">
+		<label for = "new_question">New question: </label>
+		<input type = "text" id = "new_question" name = "new_question" placeholder = "New question"><br>
+		<label for = "a">Option A: </label>
+		<input type = "text" id = "a" name = "a" placeholder = "Option A"><br>		
+		<label for = "b">Option B: </label>
+		<input type = "text" id = "b" name = "b" placeholder = "Option B"><br>
+		<label for = "c">Option C: </label>
+		<input type = "text" id = "c" name = "c" placeholder = "Option C"><br>
+		<label for = "d">Option D: </label>
+		<input type = "text" id = "d" name = "d" placeholder = "Option D"><br>
+		<input type = "submit" id = "submit" name = "submit">
+	</form>
+
+{% endblock %}
