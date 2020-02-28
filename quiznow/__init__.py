@@ -6,6 +6,8 @@ import json
 app = Flask(__name__, template_folder = "templates")
 
  
+
+count = 0
 # Set app routes
 
 # Homepage
@@ -91,6 +93,7 @@ def add_questions():
 		# Construct dictionary for new question
 		new_question = {
 			"number" : count,
+			"question" : question
 			'a' : a,
 			'b' : b,
 			'c' : c,
@@ -105,3 +108,33 @@ def add_questions():
 
 		# Redirect back to new question page
 		return redirect(url_for("questions"))
+
+
+# Show test taking page
+@app.route("/test")
+def test():
+	# TODO: dump answers to database
+	with open("questions.json", "r") as f:
+		questions = json.dump("questions.json")
+	for i in range(count):
+		for key, value in questions.items():
+			if key == "question":
+				question = value
+			if key == "a":
+				a = value
+			if key == "b":
+				b = value
+			if key == "c":
+				c = value
+			if key == "d":
+				d = value
+
+		return render_template("test.html", question = question, a = a, b = b, c = c, d = d)
+
+
+# Handle form for test taking page
+@app.route()
+def test_form():
+	return render_template("test.html")
+
+# TODO: add scoring mechanism
