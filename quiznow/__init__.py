@@ -93,11 +93,11 @@ def add_questions():
 		# Construct dictionary for new question
 		new_question = {
 			"number" : count,
-			"question" : question
-			'a' : a,
-			'b' : b,
-			'c' : c,
-			'd' : d,
+			"question" : question,
+			"a" : a,
+			"b" : b,
+			"c" : c,
+			"d" : d,
 			"answer" : answer
 		}
 
@@ -115,7 +115,7 @@ def add_questions():
 def test():
 	# TODO: dump answers to database
 	with open("questions.json", "r") as f:
-		questions = json.dump("questions.json")
+		questions = json.load(f)
 	for i in range(count):
 		for key, value in questions.items():
 			if key == "question":
@@ -133,7 +133,7 @@ def test():
 
 
 # Handle form for test taking page
-@app.route()
+@app.route("/test", methods = ["GET", "POST"])
 def test_form():
 	return render_template("test.html")
 
