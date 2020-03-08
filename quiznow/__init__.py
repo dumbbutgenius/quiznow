@@ -6,8 +6,6 @@ import json
 app = Flask(__name__, template_folder = "templates")
 
  
-
-count = 0
 # Set app routes
 
 @app.route("/")
@@ -122,6 +120,7 @@ def test():
 	"""Show test taking page"""
 
 	# TODO: dump answers to database
+	count = 1
 	with open("questions.json", "r") as f:
 		questions = json.load(f)
 	for i in range(count):
