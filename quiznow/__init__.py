@@ -10,15 +10,17 @@ app = Flask(__name__, template_folder = "templates")
 count = 0
 # Set app routes
 
-# Homepage
 @app.route("/")
 def root():
+	"""Homepage"""
+
 	return render_template("index.html")
 
 
-# Redirect user as candidate or administrator
 @app.route("/", methods = ["GET", "POST"])
 def mode_redirect():
+	"""Redirect user as candidate or administrator"""
+
 	if request.method == "POST":
 		# Set default value to avoid 404
 		default_name = "0"
@@ -33,28 +35,32 @@ def mode_redirect():
 			return redirect(url_for("admin_show"))
 
 
-# Show admin login
 @app.route("/admin")
 def admin_show():
+	"""Show admin login"""
+
 	return render_template("admin.html")
 
 
-# Show page to add questions
 @app.route("/questions")
 def questions():
+	"""Show page to add questions"""
+
 	return render_template("questions.html")
 
 
-# Show invalid login attempt
 @app.route("/invalid")
 def invalid():
+	"""Show invalid login attempt"""
+
 	return render_template("invalid.html")
 
 
-# Handle admin login
 # TODO: add real authentication
 @app.route("/admin", methods = ["GET", "POST"])
 def admin_handle():
+	"""Handle admin login"""
+
 	if request.method == "POST":
 		# Set default name to avoid 404
 		default_name = "0"
@@ -74,9 +80,10 @@ def admin_handle():
 			return redirect(url_for("invalid"))
 
 
-# Add new questions
 @app.route("/questions", methods = ["GET", "POST"])
 def add_questions():
+	"""Add new questions"""
+
 	if request.method == "POST":
 		# Set default name to avoid 404
 		default_name = "0"
@@ -110,9 +117,10 @@ def add_questions():
 		return redirect(url_for("questions"))
 
 
-# Show test taking page
 @app.route("/test")
 def test():
+	"""Show test taking page"""
+
 	# TODO: dump answers to database
 	with open("questions.json", "r") as f:
 		questions = json.load(f)
@@ -132,9 +140,10 @@ def test():
 		return render_template("test.html", question = question, a = a, b = b, c = c, d = d)
 
 
-# Handle form for test taking page
 @app.route("/test", methods = ["GET", "POST"])
 def test_form():
+	"""Handle form for test taking page"""
+
 	return render_template("test.html")
 
 # TODO: add scoring mechanism
