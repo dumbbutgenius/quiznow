@@ -6,7 +6,7 @@ import json
 app = Flask(__name__, template_folder = "templates")
 
  
- count = 1
+lines = 1
 # Set app routes
 
 @app.route("/")
@@ -123,7 +123,7 @@ def test():
 	# TODO: dump answers to database
 	with open("questions.json", "r") as f:
 		questions = json.load(f)
-	for i in range(count):
+	for i in range(lines):
 		for key, value in questions.items():
 			if key == "question":
 				question = value
@@ -139,6 +139,7 @@ def test():
 		return render_template("test.html", question = question, a = a, b = b, c = c, d = d)
 
 
+answer_count = 1
 @app.route("/test", methods = ["GET", "POST"])
 def test_form():
 	"""Handle form for test taking page"""
@@ -147,9 +148,16 @@ def test_form():
 		# Set default name to avoid 404
 		default_name = "0"
 
-		# Get answers
+		# Get answer
 		answer = request.form.get("answer", default_name)
-
+		response = {
+			"number" : count,
+			"answer" : answer
+		}
+		with open("answers.json", "w") as f:
+			json.dump(response, f)
+			f.write("\n")
+		answer_count += 1
 	return render_template("test.html")
 
 # TODO: add scoring mechanism
