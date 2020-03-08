@@ -144,6 +144,7 @@ answer_count = 1
 def test_form():
 	"""Handle form for test taking page"""
 
+	global answer_count
 	if request.method == "POST":
 		# Set default name to avoid 404
 		default_name = "0"
@@ -151,7 +152,7 @@ def test_form():
 		# Get answer
 		answer = request.form.get("answer", default_name)
 		response = {
-			"number" : count,
+			"number" : answer_count,
 			"answer" : answer
 		}
 		with open("answers.json", "w") as f:
