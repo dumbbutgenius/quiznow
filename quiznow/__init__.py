@@ -6,6 +6,7 @@ import json
 app = Flask(__name__, template_folder = "templates")
 
  
+ count = 1
 # Set app routes
 
 @app.route("/")
@@ -89,11 +90,11 @@ def add_questions():
 		# Get question details
 		question = request.form.get("new_question", default_name)
 		count = 1
-		a = request.form.get("a")
-		b = request.form.get("a")
-		c = request.form.get("a")
-		d = request.form.get("a")
-		answer = request.form.get("answer")
+		a = request.form.get("a", default_name)
+		b = request.form.get("a", default_name)
+		c = request.form.get("a", default_name)
+		d = request.form.get("a", default_name)
+		answer = request.form.get("answer", default_name)
 
 		# Construct dictionary for new question
 		new_question = {
@@ -120,7 +121,6 @@ def test():
 	"""Show test taking page"""
 
 	# TODO: dump answers to database
-	count = 1
 	with open("questions.json", "r") as f:
 		questions = json.load(f)
 	for i in range(count):
@@ -142,6 +142,13 @@ def test():
 @app.route("/test", methods = ["GET", "POST"])
 def test_form():
 	"""Handle form for test taking page"""
+
+	if request.method == "POST":
+		# Set default name to avoid 404
+		default_name = "0"
+
+		# Get answers
+		answer = request.form.get("answer", default_name)
 
 	return render_template("test.html")
 
