@@ -5,7 +5,7 @@ import json
 # Set project directory as static directory
 app = Flask(__name__, template_folder = "templates")
 
- 
+# TODO: Make number of lines come from questions.json
 lines = 1
 # Set app routes
 
